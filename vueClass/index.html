@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="root">
+        {{age}}
+        <!-- {{age}} -->
+        <input type="text" v-model="age" />
+        <div v-if="leo">
+            <h3>leo</h3>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+        <button>+</button>
+    </div>
+    <script src="./index.js" type="module"></script>
+    <script type="module">
+        const app = new Leo({
+            el: '.root',
+            data: {
+                name: 'leo',
+                age: 12,
+                text: 'hhh'
+            },
+
+            watch: {
+                name: function (val, oldVal) {
+                    console.log(`name is changed!`);
+                    console.log(val, oldVal);
+                }
+            },
+
+            beforeCreate() {
+                // this is the $options
+                console.log('beforeCreate', this.data);
+            },
+
+            created() {
+                console.log('create', this.data);
+            }
+        });
+        app.$options.data.name = 'pit';
+        app.text = 'ggg';
+        console.log(app);
+
+        document.querySelector('button').onclick = () => {
+            app.age++;
+        }
+    </script>
+</body>
+
+</html>

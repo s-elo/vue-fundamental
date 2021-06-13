@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
+
+    <script type="text/template" id="temp">
+      <div>{{thing}}--{{mood}}</div>
+
+        {{#boolean}}
+        <div>i am boolean</div>
+        {{/boolean}}
+
+        <ul>
+            {{#arr}}
+                <li>
+                    <div class="hd">info of {{name}}</div>
+                    <div>age: {{age}}</div>
+                    <div>
+                        hobbies:
+                        {{#hobbies}}
+                            <ol>{{.}}</ol>
+                        {{/hobbies}}
+                    </div>
+                </li>
+            {{/arr}}
+        </ul>
+    </script>
+    <script>
+      const data = {
+        arr: [
+          { name: "leo", age: 12, hobbies: ["eat", "play", "poo"] },
+          { name: "leo", age: 12, hobbies: ["eat", "play", "poo"] },
+          { name: "leo", age: 12, hobbies: ["eat", "play", "poo"] },
+        ],
+
+        thing: "shopping",
+        mood: "good",
+
+        boolean: false,
+      };
+
+      const templateStr = document.getElementById("temp").innerHTML;
+
+      const domStr = Mustache.render(templateStr, data);
+      const rootDom = document.getElementById("root");
+      rootDom.innerHTML = domStr;
+    </script>
+  </body>
+</html>

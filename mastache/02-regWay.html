@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const str = `my name is {{name}}, I am {{age}}`;
+      const data = {
+        name: "leo",
+        age: 22,
+      };
+
+      function render(tempStr, data) {
+        // () means to capture
+        return tempStr.replace(
+          /\{\{(\w+)\}\}/g,
+          (matchStr, captureStr, startIndex, originalStr) => {
+            console.log("matchStr: ", matchStr);
+            console.log("captureStr: ", captureStr);
+            console.log("startIndex: ", startIndex);
+            console.log("originalStr: ", originalStr);
+            return data[captureStr];
+          }
+        );
+      }
+
+      console.log(render(str, data));
+    </script>
+  </body>
+</html>
