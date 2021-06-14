@@ -1,17 +1,29 @@
 import observe from "./index.js";
+import Dep from '../Dep/Dep';
 
 export default function defineReactive(data, key, value) {
   // 递归reactive
   observe(value);
 
+  // 每个属性都有一个依赖收集实例
+  // 用来存放和此属性相关的watcher
+  // 当属性有在模板表达式中使用，即改变此属性需要更新视图时
+  // 此属性就应该绑定一个watcher，一个模板绑定一个watcher
+  // 所以多处用到此属性时就会有多个watcher被收集到此dep中
+  const dep = new Dep();
+
   Object.defineProperty(data, key, {
     get() {
-      console.log("trigger getter");
+      if (Dep.target) {
+        // 将dep存到watcher中
+        dep.depend();
+      }
+
+      console.log(key, dep);
       return value;
     },
 
     set(newVal) {
-      console.log("trigger setter");
       if (newVal === value) return;
 
       // 可能设置的新值是个对象
@@ -22,6 +34,8 @@ export default function defineReactive(data, key, value) {
       observe(newVal);
 
       value = newVal;
+
+      dep.notify(); // 通知更新(如果没有watcher就不会触发更新视图)
     },
   });
 }

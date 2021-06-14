@@ -23,7 +23,9 @@ const app = new Vue({
   computed: {},
 });
 
-console.log(app.name = 'pit');
-console.log(app.arr.push('git'));
-app.arr[2].age = 19;
+setTimeout(() => {
+  app.name = 'pit'
+}, 2000);
+
+console.log(app.obj.key);
 console.log(app);
