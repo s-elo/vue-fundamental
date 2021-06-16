@@ -24,8 +24,10 @@ const app = new Vue({
 });
 
 setTimeout(() => {
-  app.name = 'pit'
+  app.name = 'pit';
+  app.name = 'leo';
+  app.name = 'git';
 }, 2000);
 
-console.log(app.obj.key);
-console.log(app);
+// console.log(app.obj.key);
+// console.log(app);

@@ -19,7 +19,7 @@ export default function defineReactive(data, key, value) {
         dep.depend();
       }
 
-      console.log(key, dep);
+      // console.log(key, dep);
       return value;
     },
 
