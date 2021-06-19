@@ -1,4 +1,4 @@
-import observe from "../observe/index.js";
+import observe from "../observe/observe.js";
 import proxy from '../observe/proxy.js';
 
 export default function initState(vm) {

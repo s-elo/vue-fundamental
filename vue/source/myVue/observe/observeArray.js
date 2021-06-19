@@ -1,4 +1,4 @@
-import observe from "../observe/index.js";
+import observe from "./observe.js";
 
 export default function (arr) {
   for (const val of arr) {

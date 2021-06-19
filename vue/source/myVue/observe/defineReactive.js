@@ -1,9 +1,11 @@
-import observe from "./index.js";
-import Dep from '../Dep/Dep';
+import observe from "./observe.js";
+import Dep from "../Dep/Dep";
+import collectArrDeps from "./collectArrDeps";
 
 export default function defineReactive(data, key, value) {
   // 递归reactive
-  observe(value);
+  // 如果子元素也是个对象就会返回一个Observer实例
+  const childOb = observe(value);
 
   // 每个属性都有一个依赖收集实例
   // 用来存放和此属性相关的watcher
@@ -17,6 +19,13 @@ export default function defineReactive(data, key, value) {
       if (Dep.target) {
         // 将dep存到watcher中
         dep.depend();
+
+        if (childOb) {
+          childOb.dep.depend();
+          if (Array.isArray(value)) {
+            collectArrDeps(value);
+          }
+        }
       }
 
       // console.log(key, dep);

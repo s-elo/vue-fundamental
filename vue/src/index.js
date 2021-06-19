@@ -15,7 +15,8 @@ const app = new Vue({
         {
           age: 22
         }
-      ]
+      ],
+      arr1: [1, 2, 3]
     };
   },
 
@@ -27,6 +28,7 @@ setTimeout(() => {
   app.name = 'pit';
   app.name = 'leo';
   app.name = 'git';
+  app.arr1.push(4);
 }, 2000);
 
 // console.log(app.obj.key);
