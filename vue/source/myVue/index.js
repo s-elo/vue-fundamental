@@ -49,4 +49,8 @@ export default class Vue {
     // 将渲染后的DOM重新挂载回去
     return el.appendChild(vNode);
   }
+
+  $watch(key, handler) {
+    new Watcher(this, key, handler, { user: true });
+  }
 }
